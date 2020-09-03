@@ -1,4 +1,4 @@
-package com.smalaca.shipment.fakeapigateway.infrastructure.shipment.rest;
+package com.smalaca.shipment.shipment.infrastructure.distancecalculator.rest;
 
 public class Distance {
     private double length;

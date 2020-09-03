@@ -1,5 +1,7 @@
 package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
 
+import com.smalaca.shipment.shipment.infrastructure.distancecalculator.rest.Distance;
+
 class ShipmentOfferDto {
     private final String id;
     private final Distance distance;
@@ -7,7 +9,7 @@ class ShipmentOfferDto {
     private final String truckId;
     private final String warehouseId;
 
-    public ShipmentOfferDto(Builder builder) {
+    private ShipmentOfferDto(Builder builder) {
         id = builder.id;
         distance = builder.distance;
         price = builder.price;
@@ -50,8 +52,8 @@ class ShipmentOfferDto {
             return new Builder(id);
         }
 
-        Builder withDistance(double amount, String metric) {
-            distance = new Distance(amount, metric);
+        Builder withDistance(Distance distance) {
+            this.distance = distance;
             return this;
         }
 
