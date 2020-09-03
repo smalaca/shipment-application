@@ -1,6 +1,6 @@
-package com.smalaca.shipment.fakeapigateway.infrastructure.web.api.offer;
+package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
 
-public class ShipmentOfferDto {
+class ShipmentOfferDto {
     private final String id;
     private final String name;
 

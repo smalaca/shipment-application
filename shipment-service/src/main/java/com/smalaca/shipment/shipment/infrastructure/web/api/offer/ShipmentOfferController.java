@@ -1,4 +1,4 @@
-package com.smalaca.shipment.fakeapigateway.infrastructure.web.api.offer;
+package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 @RestController
 @RequestMapping("/offer")
-public class OfferController {
+public class ShipmentOfferController {
 
     @PostMapping
     public String requestShipmentsOffer() {
