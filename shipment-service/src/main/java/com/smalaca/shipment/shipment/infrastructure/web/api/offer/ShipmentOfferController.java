@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+import static com.smalaca.shipment.shipment.infrastructure.web.api.offer.ShipmentOfferDto.Builder.shipmentOfferDto;
 import static java.util.Arrays.asList;
 
 @RestController
@@ -22,6 +23,19 @@ public class ShipmentOfferController {
 
     @GetMapping("/{id}")
     public List<ShipmentOfferDto> getShipmentsOffer(@PathVariable String id) {
-        return asList(new ShipmentOfferDto(id, "name of item"), new ShipmentOfferDto("abc", "another item"));
+        return asList(
+                shipmentOfferDto(id)
+                        .withDistance(100.5, "KM")
+                        .withPrice(200.50, "USD")
+                        .withTruckId("truck1")
+                        .withWarehouseId("warehouse1")
+                        .build(),
+                shipmentOfferDto(id)
+                        .withDistance(1000.5, "KM")
+                        .withPrice(231.50, "EUR")
+                        .withTruckId("truck2")
+                        .withWarehouseId("warehouse13")
+                        .build());
     }
+
 }
