@@ -1,10 +1,10 @@
 package com.smalaca.shipment.fakeapigateway.infrastructure.rest.offer;
 
-public class OfferDto {
+public class ShipmentOfferDto {
     private final String id;
     private final String name;
 
-    OfferDto(String id, String name) {
+    ShipmentOfferDto(String id, String name) {
         this.id = id;
         this.name = name;
     }

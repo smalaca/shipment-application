@@ -16,12 +16,12 @@ import static java.util.Arrays.asList;
 public class OfferController {
 
     @PostMapping
-    public String hello() {
-        return "Hello world " + UUID.randomUUID().toString();
+    public String requestShipmentsOffer() {
+        return UUID.randomUUID().toString();
     }
 
     @GetMapping("/{id}")
-    public List<OfferDto> getShipments(@PathVariable String id) {
-        return asList(new OfferDto(id, "name of item"), new OfferDto("abc", "another item"));
+    public List<ShipmentOfferDto> getShipmentsOffer(@PathVariable String id) {
+        return asList(new ShipmentOfferDto(id, "name of item"), new ShipmentOfferDto("abc", "another item"));
     }
 }
