@@ -1,4 +1,4 @@
-package com.smalaca.shipment.fakeapigateway.infrastructure.rest.order;
+package com.smalaca.shipment.fakeapigateway.infrastructure.web.api.order;
 
 class OrderDto {
     private String id;

@@ -1,4 +1,4 @@
-package com.smalaca.shipment.fakeapigateway.infrastructure.rest.order;
+package com.smalaca.shipment.fakeapigateway.infrastructure.web.api.order;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

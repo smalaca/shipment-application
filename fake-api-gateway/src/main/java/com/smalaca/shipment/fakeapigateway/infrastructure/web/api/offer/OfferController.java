@@ -1,4 +1,4 @@
-package com.smalaca.shipment.fakeapigateway.infrastructure.rest.offer;
+package com.smalaca.shipment.fakeapigateway.infrastructure.web.api.offer;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
