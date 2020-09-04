@@ -1,10 +1,10 @@
-package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
+package com.smalaca.shipment.paymentservice.infrastructure.web.api.price;
 
-class Price {
+class PriceDto {
     private final double amount;
     private final String currency;
 
-    Price(double amount, String currency) {
+    PriceDto(double amount, String currency) {
         this.amount = amount;
         this.currency = currency;
     }

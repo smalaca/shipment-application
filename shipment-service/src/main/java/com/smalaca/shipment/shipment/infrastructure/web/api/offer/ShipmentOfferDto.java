@@ -1,6 +1,7 @@
 package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
 
 import com.smalaca.shipment.shipment.infrastructure.distancecalculator.rest.Distance;
+import com.smalaca.shipment.shipment.infrastructure.paymentservice.rest.Price;
 
 class ShipmentOfferDto {
     private final String id;
@@ -57,8 +58,8 @@ class ShipmentOfferDto {
             return this;
         }
 
-        Builder withPrice(double amount, String currency) {
-            price = new Price(amount, currency);
+        Builder withPrice(Price price) {
+            this.price = price;
             return this;
         }
 
