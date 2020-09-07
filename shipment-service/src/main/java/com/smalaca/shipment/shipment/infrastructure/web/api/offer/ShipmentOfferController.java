@@ -6,6 +6,7 @@ import com.smalaca.shipment.shipment.infrastructure.paymentservice.rest.PaymentS
 import com.smalaca.shipment.shipment.infrastructure.paymentservice.rest.Price;
 import com.smalaca.shipment.shipment.infrastructure.trucksmanagement.rest.AvailableTruck;
 import com.smalaca.shipment.shipment.infrastructure.trucksmanagement.rest.TrucksManagementClient;
+import com.smalaca.shipment.shipment.infrastructure.warehousemanagement.rest.WarehouseManagementClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,12 +26,14 @@ public class ShipmentOfferController {
     private final DistanceCalculatorClient distanceCalculatorClient;
     private final PaymentServiceClient paymentServiceClient;
     private final TrucksManagementClient trucksManagementClient;
+    private final WarehouseManagementClient warehouseManagementClient;
 
     public ShipmentOfferController(
-            DistanceCalculatorClient distanceCalculatorClient, PaymentServiceClient paymentServiceClient, TrucksManagementClient trucksManagementClient) {
+            DistanceCalculatorClient distanceCalculatorClient, PaymentServiceClient paymentServiceClient, TrucksManagementClient trucksManagementClient, WarehouseManagementClient warehouseManagementClient) {
         this.distanceCalculatorClient = distanceCalculatorClient;
         this.paymentServiceClient = paymentServiceClient;
         this.trucksManagementClient = trucksManagementClient;
+        this.warehouseManagementClient = warehouseManagementClient;
     }
 
     @PostMapping
@@ -60,14 +63,18 @@ public class ShipmentOfferController {
                 .withTruckId(truck.getId());
 
         if (truck.getStart().isAfter(startDate)) {
-            builder.addWarehouseId("warehouse_" + UUID.randomUUID().toString());
+            builder.addWarehouseId(getAvailableWarehouseId(startDate, truck.getStart()));
         }
 
         if (truck.getEnd().isBefore(endDate)) {
-            builder.addWarehouseId("warehouse_" + UUID.randomUUID().toString());
+            builder.addWarehouseId(getAvailableWarehouseId(endDate, truck.getEnd()));
         }
 
         return builder.build();
+    }
+
+    private String getAvailableWarehouseId(LocalDate start, LocalDate end) {
+        return warehouseManagementClient.findAvailable(end, start).getId();
     }
 
     private Price priceFor(Distance distance, String truckId) {
