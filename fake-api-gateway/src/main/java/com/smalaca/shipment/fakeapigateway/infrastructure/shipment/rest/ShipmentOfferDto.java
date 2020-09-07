@@ -1,11 +1,13 @@
 package com.smalaca.shipment.fakeapigateway.infrastructure.shipment.rest;
 
+import java.util.List;
+
 public class ShipmentOfferDto {
     private String id;
     private Distance distance;
     private Price price;
     private String truckId;
-    private String warehouseId;
+    private List<String> warehouseIds;
 
     public String getId() {
         return id;
@@ -23,7 +25,7 @@ public class ShipmentOfferDto {
         return truckId;
     }
 
-    public String getWarehouseId() {
-        return warehouseId;
+    public List<String> getWarehouseIds() {
+        return warehouseIds;
     }
 }

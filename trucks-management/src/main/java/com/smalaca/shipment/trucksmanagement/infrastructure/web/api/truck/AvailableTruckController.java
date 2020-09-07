@@ -21,7 +21,7 @@ public class AvailableTruckController {
     public List<AvailableTruckDto> findAll(
             @RequestParam String startPoint, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam String endPoint, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
-        return IntStream.range(1, RandomUtils.nextInt(1, 5))
+        return IntStream.range(0, RandomUtils.nextInt(2, 5))
                 .mapToObj(integer -> availableTruckDto(startDate, endDate))
                 .collect(toList());
     }

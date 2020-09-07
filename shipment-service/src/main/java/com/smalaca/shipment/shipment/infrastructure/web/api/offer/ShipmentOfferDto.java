@@ -3,19 +3,22 @@ package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
 import com.smalaca.shipment.shipment.infrastructure.distancecalculator.rest.Distance;
 import com.smalaca.shipment.shipment.infrastructure.paymentservice.rest.Price;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class ShipmentOfferDto {
     private final String id;
     private final Distance distance;
     private final Price price;
     private final String truckId;
-    private final String warehouseId;
+    private final List<String> warehouseIds;
 
     private ShipmentOfferDto(Builder builder) {
         id = builder.id;
         distance = builder.distance;
         price = builder.price;
         truckId = builder.truckId;
-        warehouseId = builder.warehouseId;
+        warehouseIds = builder.warehouseIds;
     }
 
     public String getId() {
@@ -34,8 +37,8 @@ class ShipmentOfferDto {
         return truckId;
     }
 
-    public String getWarehouseId() {
-        return warehouseId;
+    public List<String> getWarehouseIds() {
+        return warehouseIds;
     }
 
     public static class Builder {
@@ -43,7 +46,7 @@ class ShipmentOfferDto {
         private Distance distance;
         private Price price;
         private String truckId;
-        private String warehouseId;
+        private final List<String> warehouseIds = new ArrayList<>();
 
         private Builder(String id) {
             this.id = id;
@@ -68,8 +71,8 @@ class ShipmentOfferDto {
             return this;
         }
 
-        Builder withWarehouseId(String warehouseId) {
-            this.warehouseId = warehouseId;
+        Builder addWarehouseId(String warehouseId) {
+            warehouseIds.add(warehouseId);
             return this;
         }
 

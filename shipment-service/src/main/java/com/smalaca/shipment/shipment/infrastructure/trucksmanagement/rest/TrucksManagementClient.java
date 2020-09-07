@@ -1,6 +1,6 @@
 package com.smalaca.shipment.shipment.infrastructure.trucksmanagement.rest;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-@Component
+@Service
 public class TrucksManagementClient {
     private static final String URL = "http://localhost:8105";
 

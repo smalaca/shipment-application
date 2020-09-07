@@ -47,25 +47,30 @@ public class ShipmentOfferController {
 
         return trucksManagementClient.getAllAvailable(startPoint, startDate, endPoint, endDate)
                 .stream()
-                .map(availableTruck -> asShipmentOfferDto(id, startPoint, endPoint, availableTruck))
+                .map(availableTruck -> asShipmentOfferDto(id, startPoint, startDate, endPoint, endDate, availableTruck))
                 .collect(toList());
     }
 
-    private ShipmentOfferDto asShipmentOfferDto(String id, String startPoint, String endPoint, AvailableTruck truck) {
+    private ShipmentOfferDto asShipmentOfferDto(String id, String startPoint, LocalDate startDate, String endPoint, LocalDate endDate, AvailableTruck truck) {
         Distance distance = distanceCalculatorClient.calculate(startPoint, endPoint);
 
-        String warehouseId = "warehouse_" + UUID.randomUUID().toString();
-
-        return shipmentOfferDto(id)
+        ShipmentOfferDto.Builder builder = shipmentOfferDto(id)
                 .withDistance(distance)
-                .withPrice(priceFor(distance, truck.getId(), warehouseId))
-                .withTruckId(truck.getId())
-                .withWarehouseId(warehouseId)
-                .build();
+                .withPrice(priceFor(distance, truck.getId()))
+                .withTruckId(truck.getId());
 
+        if (truck.getStart().isAfter(startDate)) {
+            builder.addWarehouseId("warehouse_" + UUID.randomUUID().toString());
+        }
+
+        if (truck.getEnd().isBefore(endDate)) {
+            builder.addWarehouseId("warehouse_" + UUID.randomUUID().toString());
+        }
+
+        return builder.build();
     }
 
-    private Price priceFor(Distance distance, String truckId, String warehouseId) {
-        return paymentServiceClient.calculateFor(distance.getLength(), distance.getMetric(), truckId, warehouseId);
+    private Price priceFor(Distance distance, String truckId) {
+        return paymentServiceClient.calculateFor(distance.getLength(), distance.getMetric(), truckId, "warehouse_" + UUID.randomUUID().toString());
     }
 }
