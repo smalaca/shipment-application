@@ -16,12 +16,11 @@ public class PaymentServiceClient {
         this.restTemplate = restTemplate;
     }
 
-    public Price calculateFor(double length, String metric, String truckId, String warehouseId) {
+    public Price calculateFor(double length, String metric, String truckId) {
         URI url = UriComponentsBuilder.fromHttpUrl(URL + "/price")
                 .queryParam("length", length)
                 .queryParam("metric", metric)
                 .queryParam("truckId", truckId)
-                .queryParam("warehouseId", warehouseId)
                 .build().toUri();
 
         return restTemplate.getForObject(url, Price.class);

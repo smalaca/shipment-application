@@ -71,6 +71,6 @@ public class ShipmentOfferController {
     }
 
     private Price priceFor(Distance distance, String truckId) {
-        return paymentServiceClient.calculateFor(distance.getLength(), distance.getMetric(), truckId, "warehouse_" + UUID.randomUUID().toString());
+        return paymentServiceClient.calculateFor(distance.getLength(), distance.getMetric(), truckId);
     }
 }

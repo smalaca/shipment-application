@@ -15,7 +15,7 @@ public class PriceController {
     private static final List<String> CURRENCIES = ImmutableList.of("USD", "EUR", "PLN");
 
     @GetMapping
-    public PriceDto calculatePrice(@RequestParam double length, @RequestParam String metric, @RequestParam String truckId, @RequestParam String warehouseId) {
+    public PriceDto calculatePrice(@RequestParam double length, @RequestParam String metric, @RequestParam String truckId) {
         return new PriceDto(randomAmount(), randomCurrency());
     }
 
