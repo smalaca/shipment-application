@@ -53,8 +53,8 @@ public class ShipmentOfferController {
         return UUID.randomUUID().toString();
     }
 
-    @GetMapping("/{id}")
-    public List<ShipmentOfferDto> getShipmentsOffer(@PathVariable String id) {
+    @GetMapping("/{requestId}")
+    public List<ShipmentOfferDto> getShipmentsOffer(@PathVariable String requestId) {
         String startPoint = "pointA";
         LocalDate startDate = LocalDate.of(2020, 9, 7);
         String endPoint = "pointB";
@@ -62,14 +62,14 @@ public class ShipmentOfferController {
 
         return trucksManagementClient.getAllAvailable(startPoint, startDate, endPoint, endDate)
                 .stream()
-                .map(availableTruck -> asShipmentOfferDto(id, startPoint, startDate, endPoint, endDate, availableTruck))
+                .map(availableTruck -> asShipmentOfferDto(requestId, startPoint, startDate, endPoint, endDate, availableTruck))
                 .collect(toList());
     }
 
     private ShipmentOfferDto asShipmentOfferDto(String id, String startPoint, LocalDate startDate, String endPoint, LocalDate endDate, AvailableTruck truck) {
         Distance distance = distanceCalculatorClient.calculate(startPoint, endPoint);
 
-        ShipmentOfferDto.Builder builder = shipmentOfferDto(id)
+        ShipmentOfferDto.Builder builder = shipmentOfferDto("shipment_" + id + "_" + UUID.randomUUID().toString())
                 .withDistance(distance)
                 .withPrice(priceFor(distance, truck.getId()))
                 .withTruckId(truck.getId());
