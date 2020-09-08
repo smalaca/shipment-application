@@ -2,6 +2,8 @@ package com.smalaca.shipment.shipment.infrastructure.web.api.offer;
 
 import com.smalaca.shipment.shipment.infrastructure.distancecalculator.rest.Distance;
 import com.smalaca.shipment.shipment.infrastructure.distancecalculator.rest.DistanceCalculatorClient;
+import com.smalaca.shipment.shipment.infrastructure.historyregistry.rest.HistoryRegistryClient;
+import com.smalaca.shipment.shipment.infrastructure.historyregistry.rest.ShipmentOfferParameters;
 import com.smalaca.shipment.shipment.infrastructure.paymentservice.rest.PaymentServiceClient;
 import com.smalaca.shipment.shipment.infrastructure.paymentservice.rest.Price;
 import com.smalaca.shipment.shipment.infrastructure.trucksmanagement.rest.AvailableTruck;
@@ -27,17 +29,27 @@ public class ShipmentOfferController {
     private final PaymentServiceClient paymentServiceClient;
     private final TrucksManagementClient trucksManagementClient;
     private final WarehouseManagementClient warehouseManagementClient;
+    private final HistoryRegistryClient historyRegistryClient;
 
     public ShipmentOfferController(
-            DistanceCalculatorClient distanceCalculatorClient, PaymentServiceClient paymentServiceClient, TrucksManagementClient trucksManagementClient, WarehouseManagementClient warehouseManagementClient) {
+            DistanceCalculatorClient distanceCalculatorClient, PaymentServiceClient paymentServiceClient, TrucksManagementClient trucksManagementClient,
+            WarehouseManagementClient warehouseManagementClient, HistoryRegistryClient historyRegistryClient) {
         this.distanceCalculatorClient = distanceCalculatorClient;
         this.paymentServiceClient = paymentServiceClient;
         this.trucksManagementClient = trucksManagementClient;
         this.warehouseManagementClient = warehouseManagementClient;
+        this.historyRegistryClient = historyRegistryClient;
     }
 
     @PostMapping
     public String requestShipmentsOffer() {
+        String startPoint = "pointA";
+        LocalDate startDate = LocalDate.of(2020, 9, 7);
+        String endPoint = "pointB";
+        LocalDate endDate = LocalDate.of(2020, 9, 16);
+
+        historyRegistryClient.requestShipmentOffer(new ShipmentOfferParameters(startPoint, startDate, endPoint, endDate));
+
         return UUID.randomUUID().toString();
     }
 
