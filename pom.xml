@@ -14,7 +14,6 @@
         <module>distance-calculator</module>
         <module>shipment-service</module>
         <module>history-registry</module>
-        <module>order-service</module>
         <module>payment-service</module>
         <module>trucks-management</module>
         <module>warehouse-management</module>
